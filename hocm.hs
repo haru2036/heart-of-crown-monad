@@ -1,5 +1,8 @@
 import Control.Monad.Trans.State.Lazy
 import Control.Monad.Trans.Class
+import Control.Monad.Trans.Either
+
+type ActionPhaseTE = EitherT Coins (State Field) Coins
 
 data Field = Field {
                     inheritanceRights :: Int,
@@ -10,32 +13,24 @@ data Field = Field {
 
 type Cards = [Card]
 
-type Card = Coins -> StateT Field (Either (Coins, Field)) Coins
+type Card = Coins -> ActionPhaseTE
 
 type Coins = Int
 
-type ActionPhase = StateT Field (Either (Coins, Field)) Coins
+dummyField = Field 0 [] [] [] 
 
+zeroCoins = 0 :: Coins
 
 farm :: Card
-farm c = do
+farm c = do 
   return (c + 1)
 
-alchemist :: Card
-alchemist c = do
-  f <- get
-  return c
 
 stop :: Card
 stop c = do
-  fld <- get
-  lift $ Left (c, fld)
+  fld <- (lift get)
+  return c
 
-dummyField = Field 0 [] [] [] 
-
-testRun = runStateT (farm 0 >>= stop >>= farm) dummyField
-
-zeroCoins = 0 :: Coins
 
 printEither (Right (c, _)) = print ("Right " ++ show c)
 printEither (Left (c, _)) = print ("Left " ++ show c)
