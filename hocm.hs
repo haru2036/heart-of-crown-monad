@@ -14,9 +14,8 @@ type Card = Coins -> StateT Field (Either (Coins, Field)) Coins
 
 type Coins = Int
 
-type ActionPhaseT = StateT Field (Either (Coins, Field)) Coins
+type ActionPhase = StateT Field (Either (Coins, Field)) Coins
 
-data ActionPhaseO a = Running Field a | Finished Field a
 
 farm :: Card
 farm c = do
