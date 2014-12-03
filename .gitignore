@@ -18,3 +18,4 @@ Setup.hs
 .cabal-sandbox
 cabal.sandbox.config
 .DS_Store
+*.tar.gz
