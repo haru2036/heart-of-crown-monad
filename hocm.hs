@@ -2,7 +2,7 @@ import Control.Monad.Trans.State.Lazy
 import Control.Monad.Trans.Class
 import Control.Monad.Trans.Either
 
-type ActionPhaseTE = EitherT Coins (State Field) Coins
+type ActionPhase = EitherT Coins (State Field) Coins
 
 data Field = Field {
                     inheritanceRights :: Int,
@@ -13,7 +13,7 @@ data Field = Field {
 
 type Cards = [Card]
 
-type Card = Coins -> ActionPhaseTE
+type Card = Coins -> ActionPhase
 
 type Coins = Int
 
