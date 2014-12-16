@@ -16,7 +16,9 @@ build-type:          Simple
 cabal-version:       >=1.10
 
 library
-  -- exposed-modules:     
+  exposed-modules:
+    Data.HeartOfCrown.Types, Data.HeartOfCrown.Cards
+
   -- other-modules:       
   -- other-extensions:    
   build-depends:       base >=4.6 && <4.8
